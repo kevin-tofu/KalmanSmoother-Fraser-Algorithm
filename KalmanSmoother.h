@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "matrix.hpp"
+#include "matrix.h"
 
 typedef struct stKalmanSmoothing 
 {
