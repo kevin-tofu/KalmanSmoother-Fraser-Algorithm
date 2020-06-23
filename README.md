@@ -1,7 +1,7 @@
 # Kalman Smoother
 
-A simple and accurate Kalman Smoother implementation.  
-This implementation uses Matrix transformation of model.  
-It makes the code stable even for single-precision single precision floating point matrices.  
-Therefore,  
-it is possible to operate even in a weak CPU like embedded system environment.  
+This is a Kalman Smoother implementation.  
+Therfore this implementation uses Matrix transformation model,  
+estimation results are stable and accurate even on environment that single-precision single precision floating point matrices is used.  
+And what's more, 
+It is possible to deal with operations even on a weak CPU like embedded system environment.  
