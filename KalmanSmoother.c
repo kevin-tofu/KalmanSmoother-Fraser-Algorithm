@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "KalmanSmoother.h"
@@ -57,11 +55,11 @@ KalmanSmoothing������
 */
 int fKalmanSmoothing_Initialize(_stKalmanSmoothing* This)
 {
-	int lErrorCounter = 0;
+	int lcounter = 0;
 
-	lErrorCounter += fMat_Zero(This->oLambda);
+	lcounter += fMat_Zero(This->oLambda);
 
-	return lErrorCounter;
+	return lcounter;
 }
 
 /*!
@@ -103,7 +101,7 @@ KalmanSmoothing Algolithm
 */
 int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 {
-	int lErrorCounter = 0;
+	int lcounter = 0;
 	int measure = This->vMeasureLengh;
 	int state = This->vStateLength;
 
@@ -122,11 +120,11 @@ int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 	///
 
 	//P(t/t)Ft
-	lErrorCounter += fMat_MltTrans(lMat_ss, This->oErrCov_cor, This->oF);
+	lcounter += fMat_MltTrans(lMat_ss, This->oErrCov_cor, This->oF);
 	//P(t/t)FT��(t+1)
-	lErrorCounter += fMat_Mlt(This->oState_Smoothing, lMat_ss, This->oLambda);
+	lcounter += fMat_Mlt(This->oState_Smoothing, lMat_ss, This->oLambda);
 	//x(t/N)^ = x(t/t)^ + P(t/t)Ft��(t+1)
-	lErrorCounter += fMat_Add2(This->oState_Smoothing, This->oState_cor);
+	lcounter += fMat_Add2(This->oState_Smoothing, This->oState_cor);
 
 	//fMat_UnitMatrix
 	//fMat_Zero
@@ -140,22 +138,22 @@ int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 	//
 
 	//set I
-	lErrorCounter += fMat_UnitMatrix(lMat_ss);
+	lcounter += fMat_UnitMatrix(lMat_ss);
 
 	//set KH
-	lErrorCounter += fMat_Mlt(lF_Tilde_ss, This->oKalmanGain_cor, This->oH);
+	lcounter += fMat_Mlt(lF_Tilde_ss, This->oKalmanGain_cor, This->oH);
 
 	//set (I - KH)
-	lErrorCounter += fMat_Sub2(lMat_ss, lF_Tilde_ss);
+	lcounter += fMat_Sub2(lMat_ss, lF_Tilde_ss);
 
 	//set F~ = F(I - KH)
-	lErrorCounter += fMat_Mlt(lF_Tilde_ss, This->oF, lMat_ss);
+	lcounter += fMat_Mlt(lF_Tilde_ss, This->oF, lMat_ss);
 
 	//��(t) = (F~)t ��(t+1)
-	lErrorCounter += fMat_TransMlt(lMat_s1, lF_Tilde_ss, This->oLambda);
+	lcounter += fMat_TransMlt(lMat_s1, lF_Tilde_ss, This->oLambda);
 
 	//��(t) = (F~)t ��(t+1)
-	lErrorCounter += fMat_Copy(This->oLambda, lMat_s1);
+	lcounter += fMat_Copy(This->oLambda, lMat_s1);
 
 	//
 	//Ht[HPHt + R]^-1[y-Hx]
@@ -163,31 +161,31 @@ int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 
 	//H = I�̏ꍇ��ǉ����ׂ���
 	//HP ms ss = ms
-	lErrorCounter += fMat_Mlt(lMat_ms, This->oH, This->oErrCov_pre);
+	lcounter += fMat_Mlt(lMat_ms, This->oH, This->oErrCov_pre);
 
 	//(HP)Ht ms sm = mm
-	lErrorCounter += fMat_MltTrans(lMat_mm, lMat_ms, This->oH);
+	lcounter += fMat_MltTrans(lMat_mm, lMat_ms, This->oH);
 
 	//HPHt + R
-	lErrorCounter += fMat_Add2(lMat_mm, This->oCovR);
+	lcounter += fMat_Add2(lMat_mm, This->oCovR);
 
 	//(HPHt + R)^-1
-	lErrorCounter += fMat_InverseMatrix_Gauss2(lMat_mm);//!< Dynamically allocated
+	lcounter += fMat_InverseMatrix_Gauss2(lMat_mm);//!< Dynamically allocated
 
 	//Ht[HPHt + R]^-1  (ms)t mm = sm mm = sm
-	lErrorCounter += fMat_TransMlt(lMat_sm, This->oH, lMat_mm);
+	lcounter += fMat_TransMlt(lMat_sm, This->oH, lMat_mm);
 	
 	//Hx(t/t-1) ms s1 = m1
-	lErrorCounter += fMat_Mlt(lMat_m1, This->oH, This->oState_pre);
+	lcounter += fMat_Mlt(lMat_m1, This->oH, This->oState_pre);
 	
 	//y-Hx (Innovation) 
-	lErrorCounter += fMat_Sub2(This->oMeasure, lMat_m1);//!< Measure���󂵂Ă���B�g���̂ĂȂ̂œ��ɖ��Ȃ�
+	lcounter += fMat_Sub2(This->oMeasure, lMat_m1);//!< Measure���󂵂Ă���B�g���̂ĂȂ̂œ��ɖ��Ȃ�
 
 	//Ht[HPHt + R]^-1[y-Hx]  sm m1 = s1
-	lErrorCounter += fMat_Mlt(lMat_s1, lMat_sm, This->oMeasure);
+	lcounter += fMat_Mlt(lMat_s1, lMat_sm, This->oMeasure);
 
 	//��(t)
-	lErrorCounter += fMat_Add2(This->oLambda, lMat_s1);
+	lcounter += fMat_Add2(This->oLambda, lMat_s1);
 
 
 	fMat_Delete(lMat_ss);
@@ -208,5 +206,5 @@ int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 	_stMatrix* lF_Tilde_ss = fMat_New(state,state);
 	*/
 
-	return lErrorCounter;
+	return lcounter;
 }

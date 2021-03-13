@@ -1,0 +1,3 @@
+[submodule "numeric"]
+	path = numeric
+	url = https://github.com/kohei-tofu/numeric.git
