@@ -38,13 +38,13 @@ It is called "fixed-interval smoothing".
 Normal fixed-lag Kalman smoothing is given as follows.  
 
 * Estimated variables by smoother.
-<img src="https://github.com/kohei-tofu/KalmanFilter_in_C/blob/master/imgs/eq1.jpg" alt="eq1" title="formulation1">
+<img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq1.jpg" alt="eq1" title="formulation1">
 
 * Gain
-<img src="https://github.com/kohei-tofu/KalmanFilter_in_C/blob/master/imgs/eq2.jpg" alt="eq2" title="formulation2">
+<img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq2.jpg" alt="eq2" title="formulation2">
 
 * Estimated error covariance matrix
-<img src="https://github.com/kohei-tofu/KalmanFilter_in_C/blob/master/imgs/eq3.jpg" alt="eq3" title="formulation3">
+<img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq3.jpg" alt="eq3" title="formulation3">
 
 
 Estimated variables by smoother.
