@@ -36,6 +36,7 @@ It is called "fixed-interval smoothing".
     and back-propagate information to the backward, and Finally arrives first time-step [0].
 
 Normal fixed-lag Kalman smoothing is given as follows.  
+ALL estimated state variables can be computed in order by using this formula.  
 
 * Estimated variables by smoother.
 <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq1.jpg" alt="eq1" title="formulation1">
@@ -46,8 +47,10 @@ Normal fixed-lag Kalman smoothing is given as follows.
 * Estimated error covariance matrix
 <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq3.jpg" alt="eq3" title="formulation3">
 
+ This formulation is easy to understand, but sometimes it can be unstable when <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq4.jpg" alt="eq4" title="formulation4"> takes small values or <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq5.jpg" alt="eq5" title="formulation5"> takes huge value.
 
-Estimated variables by smoother.
+
+
 
 ### Kalman Smoother ( using matrix transoformation )
 
