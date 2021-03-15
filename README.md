@@ -47,7 +47,7 @@ ALL estimated state variables can be computed in order by using this formula.
 * Estimated error covariance matrix
 <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq3.jpg" alt="eq3" title="formulation3">
 
- This formulation is easy to understand, but sometimes it can be unstable when <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq4.jpg" alt="eq4" title="formulation4" width="30" height="20"> takes small values or <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq5.jpg" alt="eq5" title="formulation5"> takes huge value.
+ This formulation is easy to understand, but sometimes it can be unstable when <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq4.jpg" alt="eq4" title="formulation4" width="150" height="50"> takes small values or <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq5.jpg" alt="eq5" title="formulation5" width="50" height="50"> takes huge value.
 
 
 
