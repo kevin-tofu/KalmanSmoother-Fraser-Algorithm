@@ -1,14 +1,15 @@
-# Kalman Smoother
+# Kalman Smoother using Fraser Algorithm
  A high accurate Kalman smoother implementation.  
 Only "fixed-interval smoothing" is implemented now.  
 You can correct estimated information which is comming from Kalman Filter.  
-
+Because Fraser Algorithm on this code, it is quite accurate.  
 
 ## Features
- 1. It works stably even for float16 matrices.  
-    Because this implementation uses Matrix transformation model.  
- 2. Fixed-interval smoothing is implemented. you can correct information in past.  
-
+ 1. Fixed-interval smoothing is implemented. you can correct information in past.  
+ 
+ 2. It works stably even for float16 matrices.  
+    Because this implementation uses Fraser Algorithm.  
+ 
 
 ## Introduce to environment.
 ```
@@ -47,12 +48,14 @@ ALL estimated state variables can be computed in order by using this formula.
 * Estimated error covariance matrix
 <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq3.jpg" alt="eq3" title="formulation3">
 
- This formulation is easy to understand, but sometimes it can be unstable when <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq4.jpg" alt="eq4" title="formulation4" width="250" height="50"> takes small values or <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq5.jpg" alt="eq5" title="formulation5" width="80" height="50"> takes huge value.
+ This formulation is easy to understand, but sometimes it can be unstable when <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq4.jpg" alt="eq4" title="formulation4" width="300" height="50"> takes small values or <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq5.jpg" alt="eq5" title="formulation5" width="80" height="50"> takes huge value.  
+
+ So, Lost of digits can be happend on computers, and become numerically unstable.  
+Fraser Algorithm was introduced to avoid this point.
+
+### Kalman Smoother using Fraser Algorithm
 
 
-
-
-### Kalman Smoother ( using matrix transoformation )
 
 
 ## Functions and explanations.
