@@ -6,7 +6,7 @@
 #include "KalmanSmoother.h"
 
 ///
-///�֐���`_KalmanSmoothing
+/// functions for kalman smoother
 ///
 _stKalmanSmoothing* fKalmanSmoothing_New(int measure, int state);
 int fKalmanSmoothing_Initialize(_stKalmanSmoothing* This);
@@ -14,12 +14,12 @@ int fKalmanSmoothing_Delete(_stKalmanSmoothing* This);
 int fKalmanSmoothing_Run(_stKalmanSmoothing* This);
 
 
-
 /*!
-KalmanSmoothing�̈�m��
-@param    
-@return   
-@note     
+fKalmanSmoothing_New
+@param    int measure, int state
+@return   _stKalmanSmoothing*
+@note     Dynamically allocate structure data on memory 
+@note     for computing kalmansmoother process, and initialize thoes values.	
 */
 _stKalmanSmoothing* fKalmanSmoothing_New(int measure, int state)
 {
@@ -51,10 +51,10 @@ _stKalmanSmoothing* fKalmanSmoothing_New(int measure, int state)
 }
 
 /*!
-KalmanSmoothing������
-@param    
-@return   
-@note     
+fKalmanSmoothing_Initialize
+@param    _stKalmanSmoothing*
+@return   int
+@note     initialize values on data.	
 */
 int fKalmanSmoothing_Initialize(_stKalmanSmoothing* This)
 {
@@ -66,10 +66,10 @@ int fKalmanSmoothing_Initialize(_stKalmanSmoothing* This)
 }
 
 /*!
-KalmanSmoothing�������̈�폜
-@param
-@return
-@note
+fKalmanSmoothing_Delete
+@param  int
+@return  _stKalmanSmoothing*
+@note  release allocated memories.	
 */
 int fKalmanSmoothing_Delete(_stKalmanSmoothing* This)
 {
@@ -95,12 +95,10 @@ int fKalmanSmoothing_Delete(_stKalmanSmoothing* This)
 }
 
 /*!
-KalmanSmoothing Algolithm
-@param    _stKalmanSmoothing* This)
-@return   Error��
-@note     
-@note     
-@note     �g�������炵�āA���͉͂󂵂�����Ă����̂����B
+fKalmanSmoothing_Run
+@param    _stKalmanSmoothing* This
+@return   int Error
+@note     Kalman smoother main function that uses Fraser algorithm
 */
 int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 {
@@ -108,8 +106,7 @@ int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 	int measure = This->vMeasureLengh;
 	int state = This->vStateLength;
 
-	//�����Ă��̏ꍇ�A���̊֐����̌v�Z�͌J��Ԃ��A�����čs���̂�
-	//�����̗̈�͊֐����Ŋm�ہA�J�����Ȃ��ق����悢����
+	//allocate memories for local matrix
 	_stMatrix* lMat_ss = fMat_New(state,state);
 	_stMatrix* lMat_s1 = fMat_New(state,1);
 	_stMatrix* lMat_m1 = fMat_New(measure,1);
@@ -118,23 +115,19 @@ int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 	_stMatrix* lMat_ms = fMat_New(measure, state);
 	_stMatrix* lF_Tilde_ss = fMat_New(state,state);
 
-	///��������l�̍X�V
-	///x(t/N)^ = x(t/t)^ + P(t/t)Ft��(t+1)
+	/// Estimate state variable
+	///x(t/N)^ = x(t/t)^ + P(t/t)FtT(t+1)
 	///
 
 	//P(t/t)Ft
 	lcounter += fMat_MltTrans(lMat_ss, This->oErrCov_cor, This->oF);
-	//P(t/t)FT��(t+1)
+	//P(t/t)FTt(t+1)
 	lcounter += fMat_Mlt(This->oState_Smoothing, lMat_ss, This->oLambda);
-	//x(t/N)^ = x(t/t)^ + P(t/t)Ft��(t+1)
+	//x(t/N)^ = x(t/t)^ + P(t/t)FtT(t+1)
 	lcounter += fMat_Add2(This->oState_Smoothing, This->oState_cor);
 
 	//fMat_UnitMatrix
 	//fMat_Zero
-	
-	///�␳���X�V
-	///��t = �@+�A
-	///
 
 	//
 	//F~ = Ft(I - KH)
@@ -152,17 +145,17 @@ int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 	//set F~ = F(I - KH)
 	lcounter += fMat_Mlt(lF_Tilde_ss, This->oF, lMat_ss);
 
-	//��(t) = (F~)t ��(t+1)
+	//Lambda(t) = (F~)t Lambda(t+1)
 	lcounter += fMat_TransMlt(lMat_s1, lF_Tilde_ss, This->oLambda);
 
-	//��(t) = (F~)t ��(t+1)
+	//Lambda(t) = (F~)t Lambda(t+1)
 	lcounter += fMat_Copy(This->oLambda, lMat_s1);
 
 	//
 	//Ht[HPHt + R]^-1[y-Hx]
 	//
 
-	//H = I�̏ꍇ��ǉ����ׂ���
+	//H = 
 	//HP ms ss = ms
 	lcounter += fMat_Mlt(lMat_ms, This->oH, This->oErrCov_pre);
 
@@ -173,7 +166,8 @@ int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 	lcounter += fMat_Add2(lMat_mm, This->oCovR);
 
 	//(HPHt + R)^-1
-	lcounter += fMat_InverseMatrix_Gauss2(lMat_mm);//!< Dynamically allocated
+	//Dynamically allocate memory in this function
+	lcounter += fMat_InverseMatrix_Gauss2(lMat_mm);
 
 	//Ht[HPHt + R]^-1  (ms)t mm = sm mm = sm
 	lcounter += fMat_TransMlt(lMat_sm, This->oH, lMat_mm);
@@ -182,12 +176,12 @@ int fKalmanSmoothing_Run(_stKalmanSmoothing* This)
 	lcounter += fMat_Mlt(lMat_m1, This->oH, This->oState_pre);
 	
 	//y-Hx (Innovation) 
-	lcounter += fMat_Sub2(This->oMeasure, lMat_m1);//!< Measure���󂵂Ă���B�g���̂ĂȂ̂œ��ɖ��Ȃ�
+	lcounter += fMat_Sub2(This->oMeasure, lMat_m1);//!< 
 
 	//Ht[HPHt + R]^-1[y-Hx]  sm m1 = s1
 	lcounter += fMat_Mlt(lMat_s1, lMat_sm, This->oMeasure);
 
-	//��(t)
+	//Lambda(t)
 	lcounter += fMat_Add2(This->oLambda, lMat_s1);
 
 

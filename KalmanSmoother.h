@@ -25,9 +25,8 @@ typedef struct stKalmanSmoothing
 }_stKalmanSmoothing;
 
 
-
 ///
-///�֐���`_KalmanSmoothing
+///functions for _stKalmanSmoothing
 ///
 extern _stKalmanSmoothing* fKalmanSmoothing_New(int measure, int state);
 extern int fKalmanSmoothing_Initialize(_stKalmanSmoothing* This);

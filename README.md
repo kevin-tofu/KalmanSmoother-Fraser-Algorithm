@@ -58,7 +58,7 @@ Fraser Algorithm was introduced to avoid this point.
 Fraser Algorithm is defined as follows.  
 The basic definition of characters that are used in this formula is as same as  in (https://github.com/kohei-tofu/KalmanFilter_in_C).  
 
-<img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq6.jpg" alt="eq6" title="formulation6">
+<img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq_Fraser.jpg" alt="eq_Fraser" title="eq_Fraser">
 
 
 
