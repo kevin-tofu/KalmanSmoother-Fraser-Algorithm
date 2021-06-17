@@ -56,7 +56,7 @@ Fraser Algorithm was introduced to avoid this point.
 ### Kalman Smoother using Fraser Algorithm
 
 Fraser Algorithm is defined as follows.  
-The basic definition of characters that are used in this formula is as same as  in (https://github.com/kevin-tofu/KalmanFilter_in_C).  
+The basic definition of characters that are used in this formula is as same as  in (https://github.com/kevin-tofu/KalmanFilter_C).  
 
 <img src="https://github.com/kevin-tofu/KalmanSmoother_C/blob/master/imgs/eq_Fraser.jpg" alt="eq_Fraser" title="eq_Fraser">
 
