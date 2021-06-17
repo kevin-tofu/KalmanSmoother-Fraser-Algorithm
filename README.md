@@ -40,15 +40,15 @@ Normal fixed-lag Kalman smoothing is given as follows.
 ALL estimated state variables can be computed in order by using this formula.  
 
 * Estimated variables by smoother.
-<img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq1.jpg" alt="eq1" title="formulation1">
+<img src="https://github.com/kevin-tofu/KalmanSmoother_in_C/blob/master/imgs/eq1.jpg" alt="eq1" title="formulation1">
 
 * Gain
-<img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq2.jpg" alt="eq2" title="formulation2">
+<img src="https://github.com/kevin-tofu/KalmanSmoother_in_C/blob/master/imgs/eq2.jpg" alt="eq2" title="formulation2">
 
 * Estimated error covariance matrix
-<img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq3.jpg" alt="eq3" title="formulation3">
+<img src="https://github.com/kevin-tofu/KalmanSmoother_in_C/blob/master/imgs/eq3.jpg" alt="eq3" title="formulation3">
 
- This formulation is easy to understand, but sometimes it can be unstable when <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq4.jpg" alt="eq4" title="formulation4" width="300" height="50"> takes small values or <img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq5.jpg" alt="eq5" title="formulation5" width="80" height="50"> takes huge value.  
+ This formulation is easy to understand, but sometimes it can be unstable when <img src="https://github.com/kevin-tofu/KalmanSmoother_in_C/blob/master/imgs/eq4.jpg" alt="eq4" title="formulation4" width="300" height="50"> takes small values or <img src="https://github.com/kevin-tofu/KalmanSmoother_in_C/blob/master/imgs/eq5.jpg" alt="eq5" title="formulation5" width="80" height="50"> takes huge value.  
 
  So, Lost of digits can be happend on computers, and become numerically unstable.  
 Fraser Algorithm was introduced to avoid this point.
@@ -56,9 +56,9 @@ Fraser Algorithm was introduced to avoid this point.
 ### Kalman Smoother using Fraser Algorithm
 
 Fraser Algorithm is defined as follows.  
-The basic definition of characters that are used in this formula is as same as  in (https://github.com/kohei-tofu/KalmanFilter_in_C).  
+The basic definition of characters that are used in this formula is as same as  in (https://github.com/kevin-tofu/KalmanFilter_in_C).  
 
-<img src="https://github.com/kohei-tofu/KalmanSmoother_in_C/blob/master/imgs/eq_Fraser.jpg" alt="eq_Fraser" title="eq_Fraser">
+<img src="https://github.com/kevin-tofu/KalmanSmoother_in_C/blob/master/imgs/eq_Fraser.jpg" alt="eq_Fraser" title="eq_Fraser">
 
 
 
