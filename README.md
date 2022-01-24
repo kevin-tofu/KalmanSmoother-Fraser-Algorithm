@@ -1,6 +1,6 @@
 # Kalman Smoother using Fraser Algorithm
  A high accurate Kalman smoother implementation.  
-Only "fixed-interval smoothing" is implemented now.  
+Only "fixed-interval smoothing" is implemented on this repository.  
 You can correct estimated information which is comming from Kalman Filter.  
 Because Fraser Algorithm on this code, it is quite accurate.  
 
