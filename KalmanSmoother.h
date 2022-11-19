@@ -2,7 +2,6 @@
 //koheitech001 [at] gmail.com
 
 #pragma once
-
 #include "./numeric/matrix.h"
 
 typedef struct stKalmanSmoothing 
