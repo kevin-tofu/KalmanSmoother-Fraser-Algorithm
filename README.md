@@ -32,7 +32,7 @@ After getting predicted random variables on ALL time steps [0-T],
 Kalman smoother back-propagates these variables and corrects them.
 It is called "fixed-interval smoothing".  
 
-### Introction of Normal fixed-lag Kalman smoothing  
+###  Introction of Normal fixed-lag Kalman smoothing 
  There are 2 steps to use fixed-lag Kalman smoothing.  
 (1) Estimate state variables using Kalman Filter on each time-step [0-T].  
 (2) Start correcting from estimated state variable on the last time-step [T],  
@@ -57,7 +57,6 @@ ALL estimated state variables can be computed in order by using this formula.
 \end{align}
 ```
 
-
 * Estimated error covariance matrix
 <!-- <img src="https://github.com/kevin-tofu/KalmanSmoother_C/blob/master/imgs/eq3.jpg" alt="eq3" title="formulation3"> -->
 ```math
@@ -67,9 +66,9 @@ ALL estimated state variables can be computed in order by using this formula.
 ```
 
  This formulation is easy to understand, but sometimes it can be unstable when  
- 
+
  ```math
- $ \begin{align} 
+\begin{align} 
     [\hat{s}_{t+1/N} - \hat{s}_{t+1/t}] \\
     [P_{t+1/N}-P_{t+1/t}] 
 \end{align}
@@ -91,7 +90,6 @@ Fraser Algorithm was introduced to avoid this point.
 Fraser Algorithm is defined as follows.  
 The basic definition of characters that are used in this formula is as same as  in (https://github.com/kevin-tofu/KalmanFilter_in_C).  
 
-<!-- <img src="https://github.com/kevin-tofu/KalmanSmoother_C/blob/master/imgs/eq_Fraser.jpg" alt="eq_Fraser" title="eq_Fraser"> -->
 ```math
 \begin{align}
     \hat{s}_{t/T} = \hat{s}_{t/t} + P_{t/t}F_t^{T} \lambda_{t+1} \\
