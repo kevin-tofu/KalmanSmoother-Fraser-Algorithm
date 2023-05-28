@@ -66,7 +66,7 @@ ALL estimated state variables can be computed in order by using this formula.
 \end{align}
 ```
 
- This formulation is easy to understand, but sometimes it can be unstable when $ [\hat{s}_{t+1/N} - \hat{s}_{t+1/t}], [P_{t+1/N}-P_{t+1/t}] $ takes small values, or $ (P_{t+1/t})^{-1} $ takes huge value.  
+ This formulation is easy to understand, but sometimes it can be unstable when $ \begin{align} [\hat{s}_{t+1/N} - \hat{s}_{t+1/t}], [P_{t+1/N}-P_{t+1/t}] \end{align}$ takes small values, or $ (P_{t+1/t})^{-1} $ takes huge value.  
 
  So, Lost of digits can be happend on computers, and become numerically unstable.  
 Fraser Algorithm was introduced to avoid this point.
@@ -84,7 +84,7 @@ The basic definition of characters that are used in this formula is as same as  
     {\lambda}_{N+1} = 0 \\
     \hat{F}^{T} = F_t ( I - K_t H_t) \\
     {\nu}_t = [m_t - H_t \hat{s}_{t/t-1} ] \\
-    P_{t/N} = (I - C_t F_t) P_{t/t} (I - C_t F_t)_{T} + C_t (P_{t+1/N}+G_tQ_tG_t^{T})C_t^{T}
+    P_{t/N} = (I - C_t F_t) P_{t/t} (I - C_t F_t)^{T} + C_t (P_{t+1/N}+G_tQ_tG_t^{T})C_t^{T}
 \end{align}
 ```
 
