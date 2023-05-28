@@ -66,9 +66,24 @@ ALL estimated state variables can be computed in order by using this formula.
 \end{align}
 ```
 
- This formulation is easy to understand, but sometimes it can be unstable when $ \begin{align} [\hat{s}_{t+1/N} - \hat{s}_{t+1/t}], [P_{t+1/N}-P_{t+1/t}] \end{align}$ takes small values, or $ (P_{t+1/t})^{-1} $ takes huge value.  
+ This formulation is easy to understand, but sometimes it can be unstable when  
+ 
+ ```math
+ $ \begin{align} 
+    [\hat{s}_{t+1/N} - \hat{s}_{t+1/t}] \\
+    [P_{t+1/N}-P_{t+1/t}] 
+\end{align}
+ ```
 
- So, Lost of digits can be happend on computers, and become numerically unstable.  
+ takes small values, or  
+
+```math
+$ \begin{align} 
+    (P_{t+1/t})^{-1} 
+\end{align}
+```
+
+ takes huge value. So, Lost of digits can be happend on computers, and become numerically unstable.  
 Fraser Algorithm was introduced to avoid this point.
 
 ### Kalman Smoother using Fraser Algorithm
