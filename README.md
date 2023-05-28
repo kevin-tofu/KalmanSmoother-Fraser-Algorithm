@@ -77,16 +77,24 @@ Fraser Algorithm is defined as follows.
 The basic definition of characters that are used in this formula is as same as  in (https://github.com/kevin-tofu/KalmanFilter_in_C).  
 
 <!-- <img src="https://github.com/kevin-tofu/KalmanSmoother_C/blob/master/imgs/eq_Fraser.jpg" alt="eq_Fraser" title="eq_Fraser"> -->
+```math
+\begin{align}
+    \hat{s}_{t/T} = \hat{s}_{t/t} + P_{t/t}F_t^{T} \lambda_{t+1} \\
+    {\lambda}_{t} = \hat{F}^{T} {\lambda}_{t+1} \hat{H}_t^{T} [H_tP_{t/t-1}H_t^{T}+R_t]^{-1} {\nu}_t \\
+    {\lambda}_{N+1} = 0 \\
+    \hat{F}^{T} = F_t ( I - K_t H_t) \\
+    {\nu}_t = [m_t - H_t \hat{s}_{t/t-1} ] \\
+    P_{t/N} = (I - C_t F_t) P_{t/t} (I - C_t F_t)_{T} + C_t (P_{t+1/N}+G_tQ_tG_t^{T})C_t^{T}
+\end{align}
+```
 
-
-
-## Functions and explanations.
+## Functions and explanations
 
 ### Functions
+
 |Function name|Explanations|Arguments|
 |:---|:---|:---|
 |fKalmanSmoothing_New|dynamically allocate structure data on memory for computing kalmansmoother process, and initialize thoes values.|int, int : dimention of state and measurement|
 |fKalmanSmoothing_Initialize|initialize values on data.|_stKalmanSmoothing*|
 |fKalmanSmoothing_Delete| release allocated memories.|_stKalmanSmoothing*|
-|fKalmanSmoothing_Run| Execute smoothing process at the time [t]. <br> if you are going to get all prediction, need to run this process repeatedly. |_stKalmanSmoothing*|
-
+|fKalmanSmoothing_Run| Execute smoothing process at the time [t]. if you are going to get all prediction, need to run this process repeatedly. |_stKalmanSmoothing*|
